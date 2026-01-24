@@ -1,0 +1,181 @@
+/* FONTS START*/
+
+.ibm-plex-mono-light {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.ibm-plex-mono-light-italic {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.google-sans-code-regular {
+  font-family: "Google Sans Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+.google-sans-code-italic {
+  font-family: "Google Sans Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* FONTS END */
+
+
+body {
+    margin: 0;
+    background: #001E3D;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 100;
+    color: white;
+    line-height: 32px;
+    max-width:90%;
+}
+
+/* FULLSCREEN CANVAS BACKGROUND */
+#myCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+/* THREE-COLUMN GRID */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; /* 25% / 50% / 25% */
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 1; /* above canvas */
+}
+
+.left-column,
+.right-column {
+    display: flex;
+    align-items: center;     /* vertical centering */
+}
+
+.left-column {
+    justify-content: flex-end; /* push title toward center column */
+    padding-right: 40px;
+}
+
+.right-column {
+    justify-content: flex-start; /* push date/time toward center column */
+    padding-left: 40px;
+}
+
+.center-column {
+    display: flex;
+    align-items: center; /* vertically center the paragraph */
+    justify-content: center;
+    padding: 40px;
+}
+
+#question {
+    font-size: 14px;
+    line-height: 32px;
+    text-align: right;
+    align-items: flex-end;
+    white-space: pre-wrap; /* important for line breaks */
+    margin-top:0px;
+}
+
+#question-container {
+    width: 100%; /* Ensure the container takes the full width */
+    overflow: auto;
+    overflow-x: hidden; /* Hide overflow to the right */
+     /* Right-align the text */
+    white-space: wrap; 
+    color: #ffffff;
+}
+
+
+/* #question {
+    display: inline-block; /* Ensure the text is displayed inline */
+ /*   color: #ffffff;
+    font-family: 'Google Sans Code';
+    font-size: 14px;
+    font-weight: 150;
+    line-height: 32px;
+    padding-top: 40px;
+
+}*/
+
+.title {
+    font-style: italic;
+    font-weight: 100;
+    font-size: 14px;
+    text-align: center-column;
+}
+
+.image-block img {
+    width: 90%;
+    height: auto;
+    /*display: block;*/
+    position: relative;
+    top: -60px;
+    left:15px;
+}
+
+.meta {
+    font-style: italic;
+    font-weight: 100;
+    font-size: 14px;
+    text-align: center-column;
+}
+
+.meta-inline {
+    display: flex;
+    align-items: baseline; /* typographically nicer than center */
+    gap: 84px;             /* space between date and time */
+}
+/*.date {
+    position: absolute;
+}
+
+.time {
+    position: absolute;
+}*/
+
+
+/*h1 {
+    width:60%;
+    height: 60%;
+    margin: auto;
+    padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 0px;
+    font-family: 'Google Sans Code';
+    font-style: italic;
+    font-weight: 150;
+    text-align: right;
+    color: #ffffff;
+    font-size: 14px;
+}*/
+
+/*h2 {
+    width:60%;
+    height: 60%;
+    margin: auto;
+    padding: 20px;
+    font-family: Spectral;
+    text-align: right;
+    color: #ffffff;
+    font-size: 24px;
+}*/
+
+/*#myCanvas {
+    top: 0;
+    left: 0;
+    right: 0;
+    width:100vw;
+    height: 100vh;
+    position: absolute;
+}*/
