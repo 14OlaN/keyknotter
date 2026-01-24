@@ -17,6 +17,10 @@ const bgColors = {
     dark: "#00060B"
 };
 
+const stars = [];
+const STAR_FADE = 0.003;     // fade per frame
+const STAR_MIN_ALPHA = 0.1; // 6% floor
+
 const keyboardLayout = {
     // numbers
     "1": [0, 0], "2": [1, 0], "3": [2, 0], "4": [3, 0], "5": [4, 0],
@@ -97,6 +101,12 @@ function drawBackground() {
         innerColor = interpolateColor(bgColors.dark, bgColors.base, t);
     }
 
+    // 1. reset background
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = bgColors.base;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 2. draw glow
     const gradient = ctx.createRadialGradient(
         canvas.width / 2,
         canvas.height / 2,
@@ -109,10 +119,8 @@ function drawBackground() {
     gradient.addColorStop(0, innerColor);
     gradient.addColorStop(1, outerColor);
 
-    ctx.globalAlpha = 0.06; // controls fade speed
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.globalAlpha = 1;
 }
 
 // TEXT - QUESTIONS, DATE, TIME
@@ -200,8 +208,11 @@ function drawStarForKey(key) {
     const paddingX = canvas.width * 0.05;
     const paddingY = canvas.height * 0.05;
 
-    const spreadX = canvas.width * 0.25;
-    const spreadY = canvas.height * 0.25;
+    const zoneWidth = canvas.width / (maxCols + 1);
+    const zoneHeight = canvas.height / (maxRows + 1);
+
+    const spreadX = zoneWidth * 0.8;
+    const spreadY = zoneHeight * 0.8;
 
     const x =
         paddingX +
@@ -218,7 +229,23 @@ function drawStarForKey(key) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    ctx.fillText("*", x, y);
+    stars.push({
+    x,
+    y,
+    alpha: 0.8
+});
+}
+
+function drawStars() {
+    ctx.font = "100 20px 'IBM Plex Mono', monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    for (let s of stars) {
+        s.alpha = Math.max(STAR_MIN_ALPHA, s.alpha - STAR_FADE);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fillText("*", s.x, s.y);
+    }
 }
 
 
@@ -268,6 +295,7 @@ document.addEventListener('keypress', updateAnswerString);
 
 function animate() {
     drawBackground();
+    drawStars();
     requestAnimationFrame(animate);
 }
 
