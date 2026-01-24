@@ -18,8 +18,8 @@ const bgColors = {
 };
 
 const stars = [];
-const STAR_FADE = 0.003;     // fade per frame
-const STAR_MIN_ALPHA = 0.1; // 6% floor
+const STAR_FADE = 0.008;     // fade per frame
+const STAR_MIN_ALPHA = 0.2; // 6% floor
 
 const keyboardLayout = {
     // numbers
