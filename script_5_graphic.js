@@ -17,10 +17,6 @@ const bgColors = {
     dark: "#00060B"
 };
 
-const stars = [];
-const STAR_FADE = 0.008;     // fade per frame
-const STAR_MIN_ALPHA = 0.2; // 6% floor
-
 const keyboardLayout = {
     // numbers
     "1": [0, 0], "2": [1, 0], "3": [2, 0], "4": [3, 0], "5": [4, 0],
@@ -204,11 +200,8 @@ function drawStarForKey(key) {
     const paddingX = canvas.width * 0.05;
     const paddingY = canvas.height * 0.05;
 
-    const zoneWidth = canvas.width / (maxCols + 1);
-    const zoneHeight = canvas.height / (maxRows + 1);
-
-    const spreadX = canvas.width * 0.8;
-    const spreadY = canvas.height * 0.8;
+    const spreadX = canvas.width * 0.25;
+    const spreadY = canvas.height * 0.25;
 
     const x =
         paddingX +
@@ -225,24 +218,9 @@ function drawStarForKey(key) {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    stars.push({
-    x,
-    y,
-    alpha: 0.8
-    });
+    ctx.fillText("*", x, y);
 }
 
-function drawStars() {
-    ctx.font = "100 20px 'IBM Plex Mono', monospace";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    for (let s of stars) {
-        s.alpha = Math.max(STAR_MIN_ALPHA, s.alpha - STAR_FADE);
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
-        ctx.fillText("*", s.x, s.y);
-    }
-}
 
 // UPDATE ANSWER STRING
 
@@ -290,7 +268,6 @@ document.addEventListener('keypress', updateAnswerString);
 
 function animate() {
     drawBackground();
-    drawStars();
     requestAnimationFrame(animate);
 }
 
