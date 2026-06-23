@@ -85,6 +85,7 @@ body {
     align-items: flex-end;
     white-space: pre-wrap; /* important for line breaks */
     margin-top:0px;
+    margin-bottom:0px;
 }
 
 #question-container {
